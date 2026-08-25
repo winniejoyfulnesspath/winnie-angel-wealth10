@@ -50,8 +50,10 @@ img{display:block;max-width:100%}
 
 /* ===== BACKGROUND MUSIC TOGGLE ===== */
 .bg-music-frame{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
-.music-toggle{position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,#3c342a 0%,#26211b 100%);box-shadow:0 14px 32px rgba(30,24,16,.38),inset 0 1px 0 rgba(255,255,255,.08);cursor:pointer;font-family:"PingFang TC","Noto Sans TC",sans-serif}
+.music-toggle{position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,#3c342a 0%,#26211b 100%);box-shadow:0 14px 32px rgba(30,24,16,.38),inset 0 1px 0 rgba(255,255,255,.08);cursor:pointer;font-family:"PingFang TC","Noto Sans TC",sans-serif;transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
 .music-toggle:disabled{opacity:.5;cursor:default}
+@media(hover:hover) and (pointer:fine){.music-toggle:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(30,24,16,.46),inset 0 1px 0 rgba(255,255,255,.08)}}
+.music-toggle:active{transform:translateY(0)}
 .music-toggle span{font-size:16px;line-height:1}
 .music-toggle small{font-size:11px;letter-spacing:.06em;color:#e9d9b8}
 
@@ -88,6 +90,7 @@ h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(42px
   .who-row:hover{transform:translateY(-3px)}
   .voice-card{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
   .voice-card:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(104,82,58,.16)}
+  .voice-card:active{transform:translateY(-1px)}
   .payment-card .primary:hover,.enrol-actions .primary:hover,.mobile-sticky a:hover{transform:translateY(-2px)}
 }
 .motion-arrow{display:inline-block;transition:transform var(--motion-ui) var(--ease-ui)}
@@ -129,6 +132,7 @@ nav{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:.08em
 nav a{text-decoration:none;color:#625b54;transition:color var(--motion-fast) ease}
 @media(hover:hover) and (pointer:fine){nav a:not(.header-cta):hover{color:#8b6d3a}}
 .header-cta{padding:12px 20px;border:1px solid var(--champagne);border-radius:999px;background:rgba(255,255,255,.52);box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)}
+.header-cta:active{transform:translateY(0)}
 .hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(520px,.98fr);min-height:calc(100svh - 92px);align-items:center;gap:52px;padding:48px 0 46px}
 .copy{position:relative;z-index:3;padding-left:36px}
 .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.28em;color:#8d7346;margin-bottom:20px}
@@ -161,6 +165,7 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .primary:active{transform:translateY(0)}
 .paypal{font-size:13px;color:#756b61;text-decoration:none;border-bottom:1px solid rgba(164,125,63,.4);padding-bottom:3px;transition:color var(--motion-fast) ease,border-color var(--motion-fast) ease}
 @media(hover:hover) and (pointer:fine){.paypal:hover{color:#4e4842;border-color:#96733f}}
+.paypal:active{color:#3a332c}
 .micro{margin-top:13px;font-size:12px;line-height:1.7;color:#8c8278}
 .trust{display:flex;align-items:center;gap:0;margin-top:34px;max-width:680px}
 .trust-item{padding-right:26px}
@@ -336,13 +341,16 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .payment-links{margin:18px 0 0;font-size:12px;color:#7d6438}
 .payment-links a{color:#5f4a24;text-decoration:underline;text-underline-offset:2px}
 .link-btn{background:none;border:0;padding:0;font:inherit;font-size:12px;color:#5f4a24;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.link-btn:active{color:#3a2f1f}
 .bm-drawer{position:fixed;inset:0;z-index:60;visibility:hidden}
 .bm-drawer.is-open{visibility:visible}
 .bm-drawer-backdrop{position:absolute;inset:0;background:rgba(26,20,12,.55);opacity:0;transition:opacity .25s ease}
 .bm-drawer.is-open .bm-drawer-backdrop{opacity:1}
 .bm-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:#fffdf8;padding:clamp(28px,5vw,44px) clamp(24px,4vw,36px);overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;box-shadow:-24px 0 60px rgba(20,14,6,.28)}
 .bm-drawer.is-open .bm-drawer-panel{transform:translateX(0)}
-.bm-drawer-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;color:var(--ink)}
+.bm-drawer-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;color:var(--ink);transition:background var(--motion-fast) ease,border-color var(--motion-fast) ease}
+@media(hover:hover) and (pointer:fine){.bm-drawer-close:hover{background:var(--pearl);border-color:var(--champagne)}}
+.bm-drawer-close:active{background:var(--sand)}
 .bm-drawer-panel h3{margin:0 30px 18px 0;font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-size:19px;font-weight:600;color:var(--ink)}
 .bm-drawer-panel p{margin:0 0 14px;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
 .bm-contact{color:var(--ink)!important;font-weight:500}
