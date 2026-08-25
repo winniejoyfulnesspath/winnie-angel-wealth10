@@ -38,10 +38,10 @@
   --motion-reveal:620ms;
   --ease-ui:cubic-bezier(.2,.8,.2,1);
   --ease-reveal:cubic-bezier(.22,1,.36,1);
-  --reveal-distance:16px;
-  --stagger-step:70ms;
+  --reveal-distance:9px;
+  --stagger-step:45ms;
 }
-@media(max-width:640px){:root{--reveal-distance:10px}}
+@media(max-width:640px){:root{--reveal-distance:8px}}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--pearl);color:var(--ink)}
 body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;overflow-x:hidden}
@@ -73,10 +73,10 @@ h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(42px
 .js [data-reveal="right"]{--reveal-x:var(--reveal-distance);--reveal-y:0px}
 .js [data-reveal="scale"]{--reveal-x:0px;--reveal-y:6px;transform:translate3d(0,6px,0) scale(.985)}
 .js [data-reveal].is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
-[data-reveal][data-delay="1"]{--reveal-delay:70ms}
-[data-reveal][data-delay="2"]{--reveal-delay:140ms}
-[data-reveal][data-delay="3"]{--reveal-delay:210ms}
-[data-reveal][data-delay="4"]{--reveal-delay:280ms}
+[data-reveal][data-delay="1"]{--reveal-delay:45ms}
+[data-reveal][data-delay="2"]{--reveal-delay:90ms}
+[data-reveal][data-delay="3"]{--reveal-delay:135ms}
+[data-reveal][data-delay="4"]{--reveal-delay:180ms}
 
 @media(hover:hover) and (pointer:fine){
   .motion-cta{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui),border-color var(--motion-ui) var(--ease-ui),background-color var(--motion-ui) var(--ease-ui),color var(--motion-ui) var(--ease-ui)}
@@ -901,5 +901,7 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 })();
 </script>
 
+<script src="assets/lenis.min.js"></script>
+<script src="assets/motion-init.js"></script>
 </body>
 </html>
