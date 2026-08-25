@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="大天使・財富指令｜10月三日深度調頻">
 <meta name="twitter:description" content="10月份《大天使・財富指令》3日深度調頻・整理你與豐盛、價值及行動的關係。2026年10月2日至4日，8:30PM–11:00PM，Zoom線上進行。">
 <meta name="twitter:image" content="https://wealth10.joyfulnesspath.com/assets/og-share.jpg">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
   --pearl:#f8f6f1;
@@ -32,7 +33,15 @@
   --glass:rgba(255,255,255,.62);
   --shadow:0 28px 70px rgba(70,62,52,.14);
   --shadow-2:0 18px 48px rgba(104,82,58,.08);
+  --motion-fast:180ms;
+  --motion-ui:260ms;
+  --motion-reveal:620ms;
+  --ease-ui:cubic-bezier(.2,.8,.2,1);
+  --ease-reveal:cubic-bezier(.22,1,.36,1);
+  --reveal-distance:16px;
+  --stagger-step:70ms;
 }
+@media(max-width:640px){:root{--reveal-distance:10px}}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--pearl);color:var(--ink)}
 body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;overflow-x:hidden}
@@ -57,6 +66,44 @@ h2{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(42px
 .rule{width:128px;height:1px;background:linear-gradient(90deg,var(--champagne),transparent);margin:28px 0}
 .section::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.30;background-image:radial-gradient(rgba(69,61,54,.11) .45px,transparent .45px);background-size:6px 6px;mix-blend-mode:multiply}
 
+/* ===== MOTION SYSTEM ===== */
+[data-reveal]{--reveal-x:0px;--reveal-y:var(--reveal-distance);--reveal-delay:0ms}
+.js [data-reveal]{opacity:0;transform:translate3d(var(--reveal-x),var(--reveal-y),0);transition:opacity var(--motion-reveal) var(--ease-reveal) var(--reveal-delay),transform var(--motion-reveal) var(--ease-reveal) var(--reveal-delay)}
+.js [data-reveal="left"]{--reveal-x:calc(var(--reveal-distance) * -1);--reveal-y:0px}
+.js [data-reveal="right"]{--reveal-x:var(--reveal-distance);--reveal-y:0px}
+.js [data-reveal="scale"]{--reveal-x:0px;--reveal-y:6px;transform:translate3d(0,6px,0) scale(.985)}
+.js [data-reveal].is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
+[data-reveal][data-delay="1"]{--reveal-delay:70ms}
+[data-reveal][data-delay="2"]{--reveal-delay:140ms}
+[data-reveal][data-delay="3"]{--reveal-delay:210ms}
+[data-reveal][data-delay="4"]{--reveal-delay:280ms}
+
+@media(hover:hover) and (pointer:fine){
+  .motion-cta{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui),border-color var(--motion-ui) var(--ease-ui),background-color var(--motion-ui) var(--ease-ui),color var(--motion-ui) var(--ease-ui)}
+  .motion-cta:hover{transform:translateY(-2px)}
+  .motion-cta:hover .motion-arrow{transform:translateX(4px)}
+  .motion-link{background-image:linear-gradient(currentColor,currentColor);background-position:0 100%;background-repeat:no-repeat;background-size:0 1px;transition:color var(--motion-fast) ease,background-size var(--motion-ui) var(--ease-ui)}
+  .motion-link:hover{background-size:100% 1px}
+  .who-row{transition:transform var(--motion-ui) var(--ease-ui)}
+  .who-row:hover{transform:translateY(-3px)}
+  .voice-card{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
+  .voice-card:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(104,82,58,.16)}
+  .payment-card .primary:hover,.enrol-actions .primary:hover,.mobile-sticky a:hover{transform:translateY(-2px)}
+}
+.motion-arrow{display:inline-block;transition:transform var(--motion-ui) var(--ease-ui)}
+.motion-cta:active{transform:translateY(0)}
+:where(a,button,summary,input,select,textarea):focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+.gold-orbit{animation:orbit-drift 22s var(--ease-ui) infinite alternate}
+.orbit-b{animation-duration:26s}
+@keyframes orbit-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,8px,0)}}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+  .js [data-reveal]{opacity:1!important;transform:none!important}
+}
+
 /* ===== HEADER + HERO (Part 1) ===== */
 .hero-shell{
   min-height:100svh;position:relative;isolation:isolate;overflow:hidden;
@@ -79,7 +126,8 @@ header{height:92px;display:flex;align-items:center;justify-content:space-between
 .brand-copy strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:16px;letter-spacing:.18em;font-weight:500}
 .brand-copy small{display:block;font-size:10px;letter-spacing:.24em;color:#8f8479;margin-top:3px}
 nav{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:.08em}
-nav a{text-decoration:none;color:#625b54}
+nav a{text-decoration:none;color:#625b54;transition:color var(--motion-fast) ease}
+@media(hover:hover) and (pointer:fine){nav a:not(.header-cta):hover{color:#8b6d3a}}
 .header-cta{padding:12px 20px;border:1px solid var(--champagne);border-radius:999px;background:rgba(255,255,255,.52);box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)}
 .hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(520px,.98fr);min-height:calc(100svh - 92px);align-items:center;gap:52px;padding:48px 0 46px}
 .copy{position:relative;z-index:3;padding-left:36px}
@@ -101,8 +149,18 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .price{font-size:18px;color:#7d6030}
 .actions{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
 .primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:250px;padding:17px 26px;border-radius:999px;text-decoration:none;background:linear-gradient(135deg,#d8c394 0%,#b59051 58%,#a47d3f 100%);color:white;box-shadow:0 14px 30px rgba(139,105,53,.24),inset 0 1px 0 rgba(255,255,255,.55);font-weight:600;letter-spacing:.04em}
-.primary::after{content:"→";font-size:19px}
-.paypal{font-size:13px;color:#756b61;text-decoration:none;border-bottom:1px solid rgba(164,125,63,.4);padding-bottom:3px}
+.primary::after{content:"→";font-size:19px;display:inline-block}
+@media(hover:hover) and (pointer:fine){
+  .primary{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
+  .primary:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(139,105,53,.30),inset 0 1px 0 rgba(255,255,255,.55)}
+  .primary:hover::after{transform:translateX(4px)}
+  .primary::after{transition:transform var(--motion-ui) var(--ease-ui)}
+  .header-cta{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
+  .header-cta:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(139,105,53,.18)}
+}
+.primary:active{transform:translateY(0)}
+.paypal{font-size:13px;color:#756b61;text-decoration:none;border-bottom:1px solid rgba(164,125,63,.4);padding-bottom:3px;transition:color var(--motion-fast) ease,border-color var(--motion-fast) ease}
+@media(hover:hover) and (pointer:fine){.paypal:hover{color:#4e4842;border-color:#96733f}}
 .micro{margin-top:13px;font-size:12px;line-height:1.7;color:#8c8278}
 .trust{display:flex;align-items:center;gap:0;margin-top:34px;max-width:680px}
 .trust-item{padding-right:26px}
@@ -240,10 +298,11 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .faq-head .body{margin-top:22px;max-width:420px}
 .faq-list details{border-bottom:1px solid var(--line);padding:24px 0}
 .faq-list details:first-child{border-top:1px solid var(--line)}
-.faq-list summary{cursor:pointer;font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;color:#3a332c;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.faq-list summary{cursor:pointer;font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;color:#3a332c;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;transition:color var(--motion-fast) ease}
 .faq-list summary::-webkit-details-marker{display:none}
-.faq-list summary::after{content:"+";font-family:Georgia,serif;font-size:22px;color:#b28a4c;flex:none}
-.faq-list details[open] summary::after{content:"\2212"}
+.faq-list summary::after{content:"+";display:inline-block;font-family:Georgia,serif;font-size:22px;color:#b28a4c;flex:none;transition:transform var(--motion-ui) var(--ease-ui)}
+.faq-list details[open] summary::after{content:"+";transform:rotate(45deg)}
+@media(hover:hover) and (pointer:fine){.faq-list summary:hover{color:#8b6d3a}}
 .faq-list p{margin:16px 0 0;font-size:15px;line-height:1.85;color:#6c6259}
 
 /* ===== BUDDY GROUP ===== */
@@ -288,7 +347,10 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .bm-drawer-panel p{margin:0 0 14px;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
 .bm-contact{color:var(--ink)!important;font-weight:500}
 .bm-links a{color:#96733f;text-decoration:underline}
-footer{background:#2c2419;color:#c9bda6;padding:56px 0 60px;text-align:center}.f-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;max-width:900px;margin:34px auto 0;font-size:.75rem;letter-spacing:.06em}.f-title{justify-self:start;text-align:left}.f-collab{justify-self:center;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:.85rem}.f-collab a{color:#f0e6d2;text-decoration:none;opacity:.92;display:inline-flex;align-items:center;gap:6px}.f-logo{height:20px;width:20px;border-radius:50%;object-fit:cover}.f-collab a:hover{opacity:1}.f-collab .x{opacity:.55}.f-meta{justify-self:end;text-align:right;opacity:.85}.f-legal{display:inline-flex;gap:14px;margin-bottom:6px;font-size:.8rem}.f-legal a{color:#f0e6d2;text-decoration:none;min-height:40px;display:inline-flex;align-items:center}.f-legal a:hover{color:#fff}@media(max-width:700px){.f-row{grid-template-columns:1fr;text-align:center}.f-row .f-title,.f-row .f-collab,.f-row .f-meta{justify-self:center;text-align:center}.f-legal{justify-content:center}}
+footer{background:#2c2419;color:#c9bda6;padding:56px 0 60px;text-align:center}.f-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;max-width:900px;margin:34px auto 0;font-size:.75rem;letter-spacing:.06em}.f-title{justify-self:start;text-align:left}.f-collab{justify-self:center;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:.85rem}.f-collab a{color:#f0e6d2;text-decoration:none;opacity:.92;display:inline-flex;align-items:center;gap:6px}.f-logo{height:20px;width:20px;border-radius:50%;object-fit:cover}.f-collab a:hover{opacity:1}.f-collab .x{opacity:.55}.f-meta{justify-self:end;text-align:right;opacity:.85}.f-legal{display:inline-flex;gap:14px;margin-bottom:6px;font-size:.8rem}.f-legal a{color:#f0e6d2;text-decoration:none;min-height:40px;display:inline-flex;align-items:center;transition:color var(--motion-fast) ease}.f-legal a:hover{color:#fff}
+.payment-links a,.bm-links a{transition:color var(--motion-fast) ease}
+.link-btn{transition:color var(--motion-fast) ease}
+@media(hover:hover) and (pointer:fine){.payment-links a:hover,.bm-links a:hover,.link-btn:hover{color:#3a2f1f}}@media(max-width:700px){.f-row{grid-template-columns:1fr;text-align:center}.f-row .f-title,.f-row .f-collab,.f-row .f-meta{justify-self:center;text-align:center}.f-legal{justify-content:center}}
 footer strong{display:block;font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;color:#f0e6d2;margin-bottom:6px}
 footer .tag{font-size:12px;letter-spacing:.08em;color:#a99a80;margin-bottom:26px}
 footer p{max-width:640px;margin:0 auto;font-size:12px;line-height:1.9;color:#948572}
@@ -416,12 +478,12 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
     </header>
     <div class="hero" id="top">
       <div class="copy">
-        <div class="eyebrow">OCTOBER · 3-DAY DEEP TUNING</div>
-        <div class="title-lockup">
+        <div class="eyebrow" data-reveal data-delay="0">OCTOBER · 3-DAY DEEP TUNING</div>
+        <div class="title-lockup" data-reveal data-delay="1">
           <div class="kicker-lg">10月份【大天使・財富指令】</div>
           <h1>3日深度調頻<br><em>整理你與豐盛、價值及行動的關係</em></h1>
         </div>
-        <div class="intro">
+        <div class="intro" data-reveal data-delay="2">
           真正需要整理的，未必只是方法，<br>
           而是你與<strong>金錢、價值及接收</strong>之間的內在關係。<br><br>
           透過大天使主題、引導冥想與反思練習，<br>整理面對金錢、價值與選擇時的內在模式。
@@ -432,7 +494,7 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
           <div class="detail"><div class="detail-label">FORMAT</div><div class="detail-value">ZOOM · UTC+8</div></div>
           <div class="detail"><div class="detail-label">TUITION</div><div class="detail-value price">RM 233</div></div>
         </div>
-        <div class="actions">
+        <div class="actions" data-reveal data-delay="3">
           <a class="primary" href="#payment-confirm">立即報名 10 月完整課程</a>
           <a class="paypal" href="https://wa.me/60122349607?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20Winnie%2010%20%E6%9C%88%E3%80%8A%E5%A4%A7%E5%A4%A9%E4%BD%BF%E3%83%BB%E8%B2%A1%E5%AF%8C%E6%8C%87%E4%BB%A4%E3%80%8B%E7%9A%84%20PayPal%20%E4%BB%98%E6%AC%BE%E5%AE%89%E6%8E%92%E3%80%82" target="_blank" rel="noopener noreferrer">需要 PayPal？聯絡小助理</a>
         </div>
@@ -444,7 +506,7 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
         </div>
       </div>
       <div class="visual">
-        <div class="visual-frame">
+        <div class="visual-frame" data-reveal="scale" data-delay="2">
           <img src="assets/winnie-hero-side.jpg" alt="Winnie Lim 林曉怡導師照片">
           <div class="visual-wash"></div>
         </div>
@@ -462,7 +524,7 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <!-- ============ PART 2: BRIDGE / LEARNING / WHO ============ -->
 <section class="section bridge">
   <div class="container bridge-grid">
-    <div class="bridge-copy">
+    <div class="bridge-copy" data-reveal="left">
       <div class="kicker">From 8.8 to October</div>
       <h2>從一次看見，<br><span class="gold">走進三天完整整理</span></h2>
       <div class="rule"></div>
@@ -471,8 +533,8 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
       <div class="bridge-note">未曾參加 8.8 體驗課，也可以直接參加本課程。</div>
     </div>
     <div class="bridge-visual">
-      <div class="bridge-photo"><img src="assets/winnie-front.jpg" alt="Winnie 白色套裝半身照片"></div>
-      <div class="bridge-stamp">
+      <div class="bridge-photo" data-reveal="right"><img src="assets/winnie-front.jpg" alt="Winnie 白色套裝半身照片"></div>
+      <div class="bridge-stamp" data-reveal="right" data-delay="2">
         <small>OCTOBER COURSE</small>
         <strong>不只看見，<br>更完整整理。</strong>
         <span>由體驗走進三日深度調頻。</span>
@@ -484,18 +546,18 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 
 <section class="section learning">
   <div class="container learning-grid">
-    <div class="learning-intro">
+    <div class="learning-intro" data-reveal="left">
       <div class="kicker">What You Will Learn</div>
       <h2>重新整理你與<br><span class="gold">豐盛、接收及行動</span><br>的關係</h2>
       <p class="body">從看見內在模式開始，逐步整理匱乏與不安，重新建立接收、選擇與行動的空間。</p>
       <div class="pull">你會帶走的，<br>不只是一時感受。</div>
     </div>
     <div class="learning-list">
-      <div class="learn-row"><div class="learn-no">01</div><div class="learn-copy"><h3>認識 12 位本源大天使</h3><p>建立課程的核心理解，知道每一步練習所對應的方向。</p></div></div>
-      <div class="learn-row"><div class="learn-no">02</div><div class="learn-copy"><h3>整理深層匱乏感</h3><p>整理一直影響金錢感受、接收與選擇的內在模式。</p></div></div>
-      <div class="learn-row"><div class="learn-no">03</div><div class="learn-copy"><h3>3 個大天使冥想練習</h3><p>透過可在日常重複使用的練習，回到較安定與清晰的狀態。</p></div></div>
-      <div class="learn-row"><div class="learn-no">04</div><div class="learn-copy"><h3>整理金錢、價值與接收的關係</h3><p>重新理解自己與價值、支持及接收之間的關係。</p></div></div>
-      <div class="learn-row"><div class="learn-no">05</div><div class="learn-copy"><h3>整合財富指令與日常行動</h3><p>將三天的覺察整合成可持續實踐的行動方向與節奏。</p></div></div>
+      <div class="learn-row" data-reveal data-delay="0"><div class="learn-no">01</div><div class="learn-copy"><h3>認識 12 位本源大天使</h3><p>建立課程的核心理解，知道每一步練習所對應的方向。</p></div></div>
+      <div class="learn-row" data-reveal data-delay="1"><div class="learn-no">02</div><div class="learn-copy"><h3>整理深層匱乏感</h3><p>整理一直影響金錢感受、接收與選擇的內在模式。</p></div></div>
+      <div class="learn-row" data-reveal data-delay="2"><div class="learn-no">03</div><div class="learn-copy"><h3>3 個大天使冥想練習</h3><p>透過可在日常重複使用的練習，回到較安定與清晰的狀態。</p></div></div>
+      <div class="learn-row" data-reveal data-delay="3"><div class="learn-no">04</div><div class="learn-copy"><h3>整理金錢、價值與接收的關係</h3><p>重新理解自己與價值、支持及接收之間的關係。</p></div></div>
+      <div class="learn-row" data-reveal data-delay="4"><div class="learn-no">05</div><div class="learn-copy"><h3>整合財富指令與日常行動</h3><p>將三天的覺察整合成可持續實踐的行動方向與節奏。</p></div></div>
       <div class="learning-foot">
         <div><strong>看見</strong>更清晰辨認自己的慣性反應與限制感。</div>
         <div><strong>落地</strong>把課堂上的覺察帶回生活，形成新的選擇。</div>
@@ -507,17 +569,17 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <section class="section who">
   <div class="container who-grid">
     <div class="who-visual">
-      <div class="who-photo"><img src="assets/winnie-sitting.jpg" alt="Winnie 白色套裝坐姿照片"></div>
+      <div class="who-photo" data-reveal="left"><img src="assets/winnie-sitting.jpg" alt="Winnie 白色套裝坐姿照片"></div>
       <div class="who-quote"><p>當內在不再被匱乏牽著走，才有空間重新選擇。</p></div>
     </div>
-    <div class="who-copy">
+    <div class="who-copy" data-reveal="right">
       <div class="kicker">Is This For You</div>
       <h2>這個課程，<br><span class="gold">適合這樣的你</span></h2>
       <div class="who-list">
-        <div class="who-row"><div class="who-no">01</div><p>學過不少方法，回到生活後，仍然容易重複原本的反應。</p></div>
-        <div class="who-row"><div class="who-no">02</div><p>面對金錢、價值或機會時，容易懷疑自己，甚至不敢接住。</p></div>
-        <div class="who-row"><div class="who-no">03</div><p>明明一直努力，內在卻仍然很緊，難以安心作出選擇。</p></div>
-        <div class="who-row"><div class="who-no">04</div><p>想透過三天練習，重新整理自己與豐盛、接收及行動的關係。</p></div>
+        <div class="who-row" data-reveal data-delay="1"><div class="who-no">01</div><p>學過不少方法，回到生活後，仍然容易重複原本的反應。</p></div>
+        <div class="who-row" data-reveal data-delay="2"><div class="who-no">02</div><p>面對金錢、價值或機會時，容易懷疑自己，甚至不敢接住。</p></div>
+        <div class="who-row" data-reveal data-delay="3"><div class="who-no">03</div><p>明明一直努力，內在卻仍然很緊，難以安心作出選擇。</p></div>
+        <div class="who-row" data-reveal data-delay="4"><div class="who-no">04</div><p>想透過三天練習，重新整理自己與豐盛、接收及行動的關係。</p></div>
       </div>
       <div class="who-note">完全沒有接觸過大天使或冥想，也適合參加。課程會由基礎認識開始，毋須預先具備相關經驗；保持開放，按自己的步伐參與即可。</div>
     </div>
@@ -527,31 +589,31 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <!-- ============ PART 3: 三日旅程 ============ -->
 <section class="section journey" id="journey">
   <div class="container">
-    <div class="journey-head">
+    <div class="journey-head" data-reveal>
       <div class="kicker">Three-Day Journey</div>
       <h2>三日，一步一步<br><span class="gold">把豐盛帶回生活</span></h2>
       <p class="body">每一晚都建立在前一晚的基礎上。建議完整參與三日，讓覺察、校準與整合形成一條連續路徑。</p>
     </div>
     <div class="day-list">
       <div class="day-row">
-        <div class="day-num"><small>FRI · 02 OCT</small><strong>01</strong></div>
-        <div class="day-body">
+        <div class="day-num" data-reveal data-delay="0"><small>FRI · 02 OCT</small><strong>01</strong></div>
+        <div class="day-body" data-reveal data-delay="1">
           <h3>看見與整理</h3>
           <p>認識一直影響金錢感受與選擇的內在模式，透過大天使主題及引導練習，開始整理匱乏與不安。</p>
           <div class="day-takeaway"><span>當晚帶走</span>帶走更清晰的自我覺察，為接收與改變騰出空間。</div>
         </div>
       </div>
       <div class="day-row">
-        <div class="day-num"><small>SAT · 03 OCT</small><strong>02</strong></div>
-        <div class="day-body">
+        <div class="day-num" data-reveal data-delay="0"><small>SAT · 03 OCT</small><strong>02</strong></div>
+        <div class="day-body" data-reveal data-delay="1">
           <h3>接收與校準</h3>
           <p>重新理解自己與金錢、價值及支持之間的關係，在練習中感受接收，校準內在狀態。</p>
           <div class="day-takeaway"><span>當晚帶走</span>帶走一套可在日常使用的安定與校準練習。</div>
         </div>
       </div>
       <div class="day-row">
-        <div class="day-num"><small>SUN · 04 OCT</small><strong>03</strong></div>
-        <div class="day-body">
+        <div class="day-num" data-reveal data-delay="0"><small>SUN · 04 OCT</small><strong>03</strong></div>
+        <div class="day-body" data-reveal data-delay="1">
           <h3>選擇與落地</h3>
           <p>整合三天的覺察與練習，整理個人化大天使反思提示與行動方向，將體會帶回現實生活。</p>
           <div class="day-takeaway"><span>當晚帶走</span>帶走可以持續實踐的行動方向與個人節奏。</div>
@@ -566,13 +628,13 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <section class="section mentor" id="mentor">
   <div class="container mentor-grid">
     <div class="mentor-visual">
-      <div class="mentor-photo"><img src="assets/winnie-hero-side.jpg" alt="Winnie Lim 林曉怡導師照片"></div>
+      <div class="mentor-photo" data-reveal="left"><img src="assets/winnie-hero-side.jpg" alt="Winnie Lim 林曉怡導師照片"></div>
     </div>
-    <div class="mentor-copy">
+    <div class="mentor-copy" data-reveal="right">
       <div class="kicker">Your Guide</div>
       <h2>Winnie Lim<br><span class="gold">林曉怡</span></h2>
       <p class="body">Winnie 以真誠、溫柔而重視落地的方式帶領課堂，透過直覺引導、塔羅與能量練習，陪伴參加者看見自己本來已有的力量，並將課堂上的體會帶回現實生活。</p>
-      <div class="credential-grid">
+      <div class="credential-grid" data-reveal data-delay="2">
         <div><strong>10+</strong><span>年塔羅解讀經驗</span></div>
         <div><strong>2,500+</strong><span>次一對一能量解讀</span></div>
         <div><strong>800+</strong><span>小時教學經驗</span></div>
@@ -585,7 +647,7 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 
 <section class="section enrol" id="enrol">
   <div class="container">
-    <div class="enrol-card">
+    <div class="enrol-card" data-reveal>
       <div class="enrol-copy">
         <div class="kicker">02–04 OCT · 本期報名中</div>
         <h2>給自己三個晚上，<br><span class="gold" style="white-space:normal">重新整理你與豐盛的關係</span></h2>
@@ -609,29 +671,29 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <!-- ============ VOICES / 學員分享 ============ -->
 <section class="section voices" id="voices">
   <div class="container">
-    <div class="voices-head">
+    <div class="voices-head" data-reveal>
       <div class="kicker">Student Voices</div>
       <h2>真正留下來的，<br><span class="gold">是被陪伴與被接住</span>的感受</h2>
       <p class="body">以下內容節錄自過往學員公開分享，僅作原文視覺整理；點擊卡片可查看原始截圖。</p>
     </div>
     <div class="voice-grid">
-      <a class="voice-card" href="assets/testimonial-karen.jpg" target="_blank" rel="noreferrer">
+      <a class="voice-card" data-reveal data-delay="0" href="assets/testimonial-karen.jpg" target="_blank" rel="noreferrer">
         <blockquote>我個人最欣賞 Winnie 老師的一點，就是她的真誠。線上和線下都是同一個人。</blockquote>
         <span class="who-strong">Karen Chooi</span><span class="voice-meta">過往學員分享・查看原圖 ↗</span>
       </a>
-      <a class="voice-card" href="assets/testimonial-shih.jpeg" target="_blank" rel="noreferrer">
+      <a class="voice-card" data-reveal data-delay="1" href="assets/testimonial-shih.jpeg" target="_blank" rel="noreferrer">
         <blockquote>我感受到的，不只是知識或技巧，而是一種真誠與一致。</blockquote>
         <span class="who-strong">史惠好</span><span class="voice-meta">過往學員分享・查看原圖 ↗</span>
       </a>
-      <a class="voice-card" href="assets/testimonial-mindy.jpeg" target="_blank" rel="noreferrer">
+      <a class="voice-card" data-reveal data-delay="2" href="assets/testimonial-mindy.jpeg" target="_blank" rel="noreferrer">
         <blockquote>這三天我收穫滿滿，不只是知識上的學習，更是心靈上的成長與啟發。</blockquote>
         <span class="who-strong">Mindy Yah</span><span class="voice-meta">過往學員分享・查看原圖 ↗</span>
       </a>
-      <a class="voice-card" href="assets/testimonial-will.jpg" target="_blank" rel="noreferrer">
+      <a class="voice-card" data-reveal data-delay="3" href="assets/testimonial-will.jpg" target="_blank" rel="noreferrer">
         <blockquote>Winnie 老師一直在課堂上說的：落地、走出來。那些真性情的展現，就是我喜歡的典範。</blockquote>
         <span class="who-strong">Will Chang</span><span class="voice-meta">過往學員分享・查看原圖 ↗</span>
       </a>
-      <a class="voice-card" href="assets/testimonial-summer.jpeg" target="_blank" rel="noreferrer">
+      <a class="voice-card" data-reveal data-delay="4" href="assets/testimonial-summer.jpeg" target="_blank" rel="noreferrer">
         <blockquote>從開始工作坊過後，心境明顯感受到不同，每一步都踏實前進。</blockquote>
         <span class="who-strong">Summer</span><span class="voice-meta">過往學員分享・查看原圖 ↗</span>
       </a>
@@ -643,12 +705,12 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <!-- ============ PART 5: FAQ ============ -->
 <section class="section faq" id="faq">
   <div class="container faq-grid">
-    <div class="faq-head">
+    <div class="faq-head" data-reveal="left">
       <div class="kicker">Before You Join</div>
       <h2>報名前<br><span class="gold">常見問題</span></h2>
       <p class="body">報名前先了解參與、重播、付款及名額安排，減少完成付款後的不確定。</p>
     </div>
-    <div class="faq-list">
+    <div class="faq-list" data-reveal="right">
       <details>
         <summary>完全沒有接觸過大天使或冥想，可以參加嗎？</summary>
         <p>可以。課程會由基礎認識開始，毋須預先具備相關經驗；保持開放，按自己的步伐參與即可。</p>
@@ -697,13 +759,13 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <section class="section buddy">
   <div class="container">
     <div class="buddy-card">
-      <div class="buddy-copy">
+      <div class="buddy-copy" data-reveal="left">
         <div class="kicker">Free Community・公開群組</div>
         <h2>還未準備參加？<br><span class="gold" style="white-space:normal">先認識 Winnie 的分享</span></h2>
         <p class="body">你可以先加入公開群組，接收 Winnie 的直播、語音與最新活動消息，再慢慢了解是否適合自己。</p>
         <div class="buddy-note"><strong>這是公開交流群組</strong><br>加入群組不代表已完成課程報名；課程席位仍須透過付款連結確認。</div>
       </div>
-      <div class="qr-panel">
+      <div class="qr-panel" data-reveal="right">
         <div class="qr-group">
           <div class="qr-frame"><img src="assets/buddy-group-qr.jpeg" alt="大天使Buddy公開群組QR Code"></div>
           <strong>大天使 Buddy<br>WhatsApp 群組</strong>
@@ -721,11 +783,11 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <!-- ============ FINAL CTA + FOOTER ============ -->
 <section class="section final-cta" id="payment-confirm">
   <div class="container">
-    <div class="kicker">Ready to Begin?</div>
-    <h2>如果你願意，這三晚可以成為<br>重新整理自己的開始。</h2>
-    <p class="body">2 / 3 / 4 OCT 2026・8:30 PM – 11:00 PM・馬來西亞、香港及台灣時間（UTC+8）</p>
+    <div class="kicker" data-reveal data-delay="0">Ready to Begin?</div>
+    <h2 data-reveal data-delay="1">如果你願意，這三晚可以成為<br>重新整理自己的開始。</h2>
+    <p class="body" data-reveal data-delay="2">2 / 3 / 4 OCT 2026・8:30 PM – 11:00 PM・馬來西亞、香港及台灣時間（UTC+8）</p>
 
-    <div class="payment-card">
+    <div class="payment-card" data-reveal data-delay="3">
       <span class="payment-eyebrow">OCTOBER 2026</span>
       <h3>三日完整線上課程</h3>
       <p class="payment-meta">2–4 OCT · 8:30–11:00 PM · ZOOM</p>
@@ -769,6 +831,21 @@ h1,h2,h3,p,.micro,.day-takeaway,.learn-copy p,summary,.who-note,dt,dd,.intro,.bm
 <div class="mobile-sticky"><a href="#payment-confirm">02–04 OCT · RM233 · 立即報名</a></div>
 
 <script>
+(function(){
+  var revealItems = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries, observer){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealItems.forEach(function(item){ revealObserver.observe(item); });
+  } else {
+    revealItems.forEach(function(item){ item.classList.add('is-visible'); });
+  }
+})();
 (function(){
   var audio = document.getElementById("bg-music");
   var toggle = document.getElementById("music-toggle");
