@@ -131,7 +131,10 @@ header{height:92px;display:flex;align-items:center;justify-content:space-between
 nav{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:.08em}
 nav a{text-decoration:none;color:#625b54;transition:color var(--motion-fast) ease}
 @media(hover:hover) and (pointer:fine){nav a:not(.header-cta):hover{color:#8b6d3a}}
-.header-cta{padding:12px 20px;border:1px solid var(--champagne);border-radius:999px;background:rgba(255,255,255,.52);box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)}
+.header-cta{position:relative;overflow:hidden;padding:12px 20px;border:1px solid var(--champagne);border-radius:999px;background:rgba(255,255,255,.52);box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)}
+.header-cta::before,.primary::before,.mobile-sticky a::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+@media(hover:hover) and (pointer:fine){.header-cta:hover::before,.primary:hover::before,.mobile-sticky a:hover::before{animation:ctaSweep .7s ease}}
+@keyframes ctaSweep{from{transform:translateX(-120%)}to{transform:translateX(120%)}}
 .header-cta:active{transform:translateY(0)}
 .hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(520px,.98fr);min-height:calc(100svh - 92px);align-items:center;gap:52px;padding:48px 0 46px}
 .copy{position:relative;z-index:3;padding-left:36px}
@@ -152,7 +155,7 @@ h1 em::after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-9px;
 .detail-value{font-size:15px;font-weight:600;letter-spacing:.02em}
 .price{font-size:18px;color:#7d6030}
 .actions{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
-.primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:250px;padding:17px 26px;border-radius:999px;text-decoration:none;background:linear-gradient(135deg,#d8c394 0%,#b59051 58%,#a47d3f 100%);color:white;box-shadow:0 14px 30px rgba(139,105,53,.24),inset 0 1px 0 rgba(255,255,255,.55);font-weight:600;letter-spacing:.04em}
+.primary{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:250px;padding:17px 26px;border-radius:999px;text-decoration:none;background:linear-gradient(135deg,#d8c394 0%,#b59051 58%,#a47d3f 100%);color:white;box-shadow:0 14px 30px rgba(139,105,53,.24),inset 0 1px 0 rgba(255,255,255,.55);font-weight:600;letter-spacing:.04em}
 .primary::after{content:"→";font-size:19px;display:inline-block}
 @media(hover:hover) and (pointer:fine){
   .primary{transition:transform var(--motion-ui) var(--ease-ui),box-shadow var(--motion-ui) var(--ease-ui)}
@@ -454,7 +457,7 @@ footer p{max-width:640px;margin:0 auto;font-size:12px;line-height:1.9;color:#948
   .final-cta .primary{width:100%}
 
   .mobile-sticky{position:fixed;display:flex;left:12px;right:12px;bottom:12px;z-index:20}
-  .mobile-sticky a{width:100%;padding:15px 18px;border-radius:999px;text-decoration:none;text-align:center;background:linear-gradient(135deg,#d8c394,#a47d3f);color:#fff;font-weight:600;box-shadow:0 12px 28px rgba(109,80,36,.3)}
+  .mobile-sticky a{position:relative;overflow:hidden;width:100%;padding:15px 18px;border-radius:999px;text-decoration:none;text-align:center;background:linear-gradient(135deg,#d8c394,#a47d3f);color:#fff;font-weight:600;box-shadow:0 12px 28px rgba(109,80,36,.3)}
   .music-toggle{bottom:92px;right:14px;padding:9px 13px}
   .music-toggle small{display:none}
 }
